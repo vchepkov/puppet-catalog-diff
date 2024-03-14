@@ -80,6 +80,8 @@ module Puppet::CatalogDiff
 
       if certless
         endpoint = '/puppet/v4/catalog'
+        format = Puppet::Network::FormatHandler.format_for(:rich_data_json)
+        headers['Accept'] = format.mime
         headers['Content-Type'] = 'text/json'
         body = {
           certname: node_name,
